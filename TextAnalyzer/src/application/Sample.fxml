@@ -103,7 +103,7 @@
                   <AnchorPane fx:id="urlAnchor" prefHeight="293.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <TextField fx:id="urlTxt" layoutX="10.0" layoutY="24.0" prefHeight="25.0" prefWidth="697.0" />
-                        <Label layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="279.0" text="Enter  an URL to select words from to count" />
+                        <Label layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="279.0" text="Enter  URL to select words to count" />
                         <Button fx:id="btnFormSelect" layoutX="639.0" layoutY="69.0" mnemonicParsing="false" onAction="#onActionBtn" text="Select" />
                      </children>
                   </AnchorPane>

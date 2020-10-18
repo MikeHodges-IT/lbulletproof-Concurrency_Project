@@ -73,8 +73,8 @@ public class Controller {
  public void initialize(){
  final WebEngine webEngine = infoWeb.getEngine();   	 
 webEngine.loadContent(
-		  "<Center><H1><b>FX Text Analizer</b></H1></Center>"
-		+ " Enter a URL or use the defualt URL below. <BR>"
+		  "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
+		+ " Enter a URL or use the default URL below. <BR>"
 		+ " Then click the Select button below.<BR>");
 urlStr = "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm";
 urlTxt.setText(urlStr);
@@ -98,8 +98,8 @@ btnChart.setVisible(false);
     	case "btnStart":
     		HideALl();
     		webEngine.loadContent(
-    				  "<Center><H1><b>FX Text Analizer</b></H1></Center>"
-    				+ " Enter a URL or use the defualt URL bellow. <BR>"
+    				  "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
+    				+ " Enter a URL or use the default URL below. <BR>"
     				+ " Then click the select button below. <BR>");
     		urlStr = "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm";
     		urlAnchor.setVisible(true);
@@ -108,7 +108,7 @@ btnChart.setVisible(false);
     	case "btnFormSelect":
     		HideALl();
     		webEngine.loadContent(
-  				  "<Center><H1><b>FX Text Analizer</b></H1></Center>"
+  				  "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
   				+ " Select the text to be counted.  <BR>"
   				+ " After selection is made click Select text button that will appear above. <BR>");
     		urlStr = urlTxt.getText();
@@ -118,9 +118,9 @@ btnChart.setVisible(false);
     	case "btnSelect":
     		HideALl();
     		webEngine.loadContent(
-  				  "<Center><H1><b>FX Text Analizer</b></H1></Center>"
-  				+ " Aprove your selection and click chart button above.  <BR>"
-  				+ " Or click select the Start button above to start over <BR>"
+  				  "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
+  				+ " Approve your selection and click Graph Data button above.  <BR>"
+  				+ " Or click select the Select URL button above to start over <BR>"
   				);
     		if (webView != null) {
             	selection = (String) webView.getEngine().executeScript("window.getSelection().toString()");
@@ -135,9 +135,9 @@ btnChart.setVisible(false);
     	case "btnChart":
     		HideALl();
        		webEngine.loadContent(
-  				  "<Center><H1><b>FX Text Analizer</b></H1></Center>"
+  				  "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
   				+ " View charted results. <BR>"
-  				+ " Then click the Select URL button to strat again. <BR>"
+  				+ " Then click the Select URL button to start again. <BR>"
   				);
     		barChart.getData().clear();
             XYChart.Series dataSeries1 = new XYChart.Series();
@@ -206,7 +206,7 @@ btnChart.setVisible(false);
 	    	splitHelp.setDividerPositions(0.16);   			
    		} 
     	webEngine.loadContent(		
-		  "<Center><H1><b>FX Text Analizer</b></H1></Center>"
+		  "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
 		+ " Created by Mike Hodges <BR>"
 		+ " For Assignment Six <BR>"
 		+ " ");
@@ -218,7 +218,7 @@ btnChart.setVisible(false);
  void onMouseDrag(MouseEvent event) {
 	 btnSelect.setVisible(true);
 	 final WebEngine webEngine = infoWeb.getEngine();
-	 webEngine.loadContent( "<Center><H1><b>FX Text Analizer</b></H1></Center>"
+	 webEngine.loadContent( "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
 		+ " Click Select Text above.<BR>"
 		+ " <BR>");
 
