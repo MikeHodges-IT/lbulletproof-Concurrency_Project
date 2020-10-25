@@ -1,11 +1,5 @@
 package application;
 
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -19,13 +13,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+
+
 public class Controller {
 	String str;
 	String urlStr = null;
 	String tempString;
 	String selection;
 	String infoTxtStr;
-	
+
 	@FXML
     private WebView infoWeb;
 			  
@@ -80,6 +76,8 @@ urlStr = "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm";
 urlTxt.setText(urlStr);
 btnSelect.setVisible(false);
 btnChart.setVisible(false);
+
+
    
  }
 
@@ -91,11 +89,12 @@ btnChart.setVisible(false);
     	System.out.println(str + " Clicked");
     	System.out.println(event.getSource().toString());
     	System.out.println(splitHelp.toString());
-    	
+
 
      	   
     	switch(str) {
     	case "btnStart":
+
     		HideALl();
     		webEngine.loadContent(
     				  "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
@@ -142,44 +141,14 @@ btnChart.setVisible(false);
     		barChart.getData().clear();
             XYChart.Series dataSeries1 = new XYChart.Series();
             dataSeries1.setName("2014");
-    		
-    		final List<String> wordlist = Stream.of
-    				(
-    				tempString
-    				.replaceAll("&mdash;" , " ")
-    				.replaceAll("<[^>]*>"," ")
-    				.replaceAll("[\\s+\\W\\d]", " ")
-    				.trim()			
-    				.toLowerCase()
-    				.split("\\s+"))
-    				.collect(Collectors.toList()
-    				);
-    		final Map<String, Long> wordFreqMap = 
-    				wordlist
-    				.stream()
-    				.collect(
-    						Collectors.groupingBy( 
-    								Function.identity(), 
-    								Collectors.counting()
-    								)
-    						);
-    		wordFreqMap
+
+            TextAnalyzer.htmlStringToFreqMap(tempString)
     		.entrySet()
-    		.stream()
-    		.sorted(
-    				Map
-    				.Entry
-    				.<String, Long>comparingByValue()
-    				.reversed()
-    				)
-    		.limit(20)
-    		.forEach(
-    				e -> { dataSeries1.getData().add(new XYChart.Data(e.getKey(),e.getValue())); 
-    				       System.out.println(str + " Clicked");
-    				}
-    				);
+    		.stream().forEach(e -> { 
+    				dataSeries1.getData().add(new XYChart.Data(e.getKey(),e.getValue()));    				       
+    				});
     		
-    		
+    		System.out.println(str + " Clicked");
     		barChart.getData().add(dataSeries1);
     		barChart.setVisible(true);
 
