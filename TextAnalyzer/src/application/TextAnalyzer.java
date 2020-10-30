@@ -32,7 +32,7 @@ public class TextAnalyzer {
 		                   .limit(20)
 		                   .collect(toMap(Entry::getKey, Entry::getValue, (e1,e2) -> e2,LinkedHashMap::new));	
 		
-		System.out.println(wordFreqHashMap);
+//		System.out.println(wordFreqHashMap);
 		return  wordFreqHashMap;
 		
 	}

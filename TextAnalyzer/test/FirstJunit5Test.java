@@ -48,7 +48,7 @@ class FirstJunit5Test {
 			
 			
 		});
-		System.out.println(wordFreqHashMap.keySet());
+//		System.out.println(wordFreqHashMap.keySet());
 		
 		assertFalse(wordFreqHashMap.isEmpty(),"wordFreqHashMap.isEmpty()");
 		assertFalse(wordFreqHashMap.containsKey("the"),"the word 'the' is not in this HashMap");
