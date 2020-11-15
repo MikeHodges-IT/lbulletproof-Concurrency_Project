@@ -13,9 +13,28 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import application.TextAnalyzer;
 
+
+/**
+* <h1>FirstJunit5Test</h1>
+* 
+* Has multiple method that test the linkHashMap of word occurrence count.
+* 
+* <p>
+* <b>Note:</b> The TextAnalyzer class contains the following methods:
+*  void test()
+*  void mytest()
+*  void testParameterized(String word) 
+*  
+* @author  Mike Hodges
+* @version 1.0
+* @since   2020-11-15
+*/
 class FirstJunit5Test {
 
-
+	/**
+	* Very simple test to see if the word "the" is present in a string using TextAnalyzer.htmlStringToFreqMap 
+	*
+	*/
 	@Test
 	@DisplayName("My Tester")
 	void test() {
@@ -27,6 +46,15 @@ class FirstJunit5Test {
 		assertEquals(2,wordFreqHashMap.size(),"Equal");
 		System.out.println("This test ran");
 	}
+	/**
+	* Very simple test that is repeated three times 
+	* 
+	*   assertFalse(wordFreqHashMap.isEmpty(),"wordFreqHashMap.isEmpty()");
+	*   assertFalse(wordFreqHashMap.containsKey("the"),"the word 'the' is not in this HashMap");
+	*   assertEquals(20,wordFreqHashMap.size(),"Equal");
+	*  
+	*
+	*/
 	@RepeatedTest(3)
 	void mytest() {
 	
@@ -57,7 +85,12 @@ class FirstJunit5Test {
 			
 		
 	}
-	
+	/**
+	* ParameterizedTest 
+	*  
+	*  Test TextAnalyzer.htmlStringToFreqMap multiple times with different words.
+	*  
+	*/
 	@ParameterizedTest
 	@ValueSource(strings = {"and", "a", "i", "door", "some", "while", "chamber", "of", "tapping", "my", "at", "rapping", "lore", "nearly", "upon", "weak", "only", "came", "forgotten", "napping" })
 	void testParameterized(String word) {

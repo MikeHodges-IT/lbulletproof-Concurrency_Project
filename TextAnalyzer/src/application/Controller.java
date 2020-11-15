@@ -13,14 +13,38 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
-
+/**
+* <h1>Controller</h1>
+* The controller event handler methods declared as public 
+* so they can be set or invoked by the loader
+* 
+* <p>
+* <b>Note:</b> The Controller class contains the following methods:
+*  public void initialize()
+*  void onActionBtn(ActionEvent event)
+*  void onMouseDrag(MouseEvent event)
+*  void HideALl() 
+*  
+* @author  Mike Hodges
+* @version 1.0
+* @since   2020-11-15
+*/
 
 public class Controller {
+	/**
+	* Is a string that stores name of the button that is clicked.
+	* It is then used as the switch in a case statement. 
+	*/
 	String str;
+	/**
+	*Is a string that stores the url of the web page used for the word count.  
+	*/
 	String urlStr = null;
-	String tempString;
+	/**
+	* Is a string that stores the the selected text.  
+	*/
 	String selection;
-	String infoTxtStr;
+
 
 	@FXML
     private WebView infoWeb;
@@ -65,7 +89,16 @@ public class Controller {
     @FXML
     private AnchorPane infoWebAnc;
  
- @FXML   
+  
+ 
+ /**
+  * Is run first and is used to set up the initial setting.
+  * Set the urlStr to "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm" 
+  * as the default
+  * Load the initial HTML instruction to the user.
+  * Set the visibility of the various elements. 
+  */
+  @FXML 
  public void initialize(){
  final WebEngine webEngine = infoWeb.getEngine();   	 
 webEngine.loadContent(
@@ -76,14 +109,32 @@ urlStr = "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm";
 urlTxt.setText(urlStr);
 btnSelect.setVisible(false);
 btnChart.setVisible(false);
-
-
-   
+ 
  }
 
- @FXML  
-    void onActionBtn(ActionEvent event) {
+ 
+ 
+ /**
+ * onActionBtn runs every time any of the buttons are clicked.
+ * 
+ * The buttons name is striped from the event and used as a switch in the case statement.
+ * The case statement then show or hide various elements. 
+ * The case statement calls TextAnalyzer LinkedHashMap<String, Long> htmlStringToFreqMap(String str)
+ * and converts the output to a chart.
+ * 
+ * This should be cleaned up at a future date by adding a few methods.
+ *   
+ *   
+ *   
+ * @param event  Takes a button click event
+ * 
+ */ 
+ @FXML 
+     void onActionBtn(ActionEvent event) {
 	    final WebEngine webEngine = infoWeb.getEngine();  
+	    /**
+	     * str =  the event string after spiting and separating out the button name.     
+	     */
     	str = event.getSource().toString().substring(event.getSource().toString().indexOf("=")+1, event.getSource().toString().indexOf(","));
     	
     	System.out.println(str + " Clicked");
@@ -95,7 +146,7 @@ btnChart.setVisible(false);
     	switch(str) {
     	case "btnStart":
 
-    		HideALl();
+    		HideAll();
     		webEngine.loadContent(
     				  "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
     				+ " Enter a URL or use the default URL below. <BR>"
@@ -105,17 +156,17 @@ btnChart.setVisible(false);
     		break;
     		
     	case "btnFormSelect":
-    		HideALl();
+    		HideAll();
     		webEngine.loadContent(
   				  "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
   				+ " Select the text to be counted.  <BR>"
   				+ " After selection is made click Select text button that will appear above. <BR>");
-    		urlStr = urlTxt.getText();
-    		webView.setVisible(true);
-    	    webView.getEngine().load(urlStr);     	    
+    			urlStr = urlTxt.getText();
+    			webView.setVisible(true);
+    			webView.getEngine().load(urlStr);     	    
     		break;
     	case "btnSelect":
-    		HideALl();
+    		HideAll();
     		webEngine.loadContent(
   				  "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
   				+ " Approve your selection and click Graph Data button above.  <BR>"
@@ -126,13 +177,13 @@ btnChart.setVisible(false);
             	textarea1.setText(selection);
             }
         	   textarea1.setVisible(true);
-   	     	   tempString = selection;
-    		btnSelect.setVisible(false);
-    		btnChart.setVisible(true);
+   	     	   //tempString = selection;
+   	     	   btnSelect.setVisible(false);
+   	     	   btnChart.setVisible(true);
     		
     		break;
     	case "btnChart":
-    		HideALl();
+    		HideAll();
        		webEngine.loadContent(
   				  "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
   				+ " View charted results. <BR>"
@@ -142,7 +193,7 @@ btnChart.setVisible(false);
             XYChart.Series dataSeries1 = new XYChart.Series();
             dataSeries1.setName("2014");
 
-            TextAnalyzer.htmlStringToFreqMap(tempString)
+            TextAnalyzer.htmlStringToFreqMap(selection)
     		.entrySet()
     		.stream().forEach(e -> { 
     				dataSeries1.getData().add(new XYChart.Data(e.getKey(),e.getValue()));    				       
@@ -155,7 +206,6 @@ btnChart.setVisible(false);
     		break;
     	case "btnHelp":
     		textarea1.appendText(str + " Clicked");
-
     	    if(infoWebAnc.isVisible()) {
     	    	btnHelp.setText("View Help");
     	    	infoWebAnc.setVisible(false);
@@ -168,7 +218,7 @@ btnChart.setVisible(false);
     	    
     		break;
     	case "btnAbout":
-    		HideALl();
+    		HideAll();
    		if(infoWebAnc.isVisible() == false) {
 	    	btnHelp.setText("Hide Help");
 	    	infoWebAnc.setVisible(true);
@@ -184,16 +234,30 @@ btnChart.setVisible(false);
     	} 
     }
  @FXML
+ /**
+ * onMouseDrag runs every time the mouse is dragged across the html highlighting text.
+ * 
+ * The select text is confirmed by user then counted.  
+ *   
+ *   
+ * @param event  Takes a mouse drag event
+ * 
+ */ 
  void onMouseDrag(MouseEvent event) {
 	 btnSelect.setVisible(true);
 	 final WebEngine webEngine = infoWeb.getEngine();
 	 webEngine.loadContent( "<Center><H1><b>FX Text Analyzer</b></H1></Center>"
 		+ " Click Select Text above.<BR>"
 		+ " <BR>");
-
  }
-void HideALl() {
-	
+
+ /**
+ * 
+ * Hideall basically resets everything by setting all element to not visible.
+ * 
+ */ 
+ void HideAll() {
+
     barChart.setVisible(false);
 	textarea1.setVisible(false);
 	urlAnchor.setVisible(false);
